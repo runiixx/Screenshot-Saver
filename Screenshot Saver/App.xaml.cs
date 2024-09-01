@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Design.Serialization;
 using System.Configuration;
 using System.Data;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Windows;
 using Forms = System.Windows.Forms;
@@ -14,12 +15,20 @@ namespace Screenshot_Saver
     
     public partial class App : System.Windows.Application
     {
+        [DllImport("Kernel32")]
+        public static extern void AllocConsole();
+
+        [DllImport("Kernel32", SetLastError = true)]
+        public static extern void FreeConsole();
+
+
         MainWindow mainWindow = new MainWindow();
         NotifyIcon notifyIcon;
         Boolean isShown = true;
         private  GlobalKeyInterceptor.KeyInterceptor _interceptor;
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            //AllocConsole();
             mainWindow.Show();
 
             notifyIcon = new NotifyIcon();

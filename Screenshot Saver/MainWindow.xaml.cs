@@ -25,20 +25,21 @@ namespace Screenshot_Saver
         String path;
         BitmapSource lastPhoto;
         BitmapSource currentPhoto;
-        Thread saveThread;
         SettingsManager Manager;
         GlobalKeyInterceptor.KeyInterceptor _interceptor;
 
         
         public MainWindow()
         {
+            
             InitializeComponent();
             isSave = true;
-            YesLabel.Content = Directory.GetCurrentDirectory();
+            
             Manager = new SettingsManager();
             Manager.ReadFile();
-            FileNameTextBox.Text = Manager.getSettingValue("File name");
-            path =Manager.getSettingValue("Path");
+            FileNameTextBox.Text = (Manager.getSettingValue("File name") is null) ? "default" : Manager.getSettingValue("File name");
+            path = (Manager.getSettingValue("Path") is null) ? "C:\\" : Manager.getSettingValue("Path");
+         
             GlobalKeyInterceptor.Shortcut[] shortcut = new GlobalKeyInterceptor.Shortcut[]{
                 new GlobalKeyInterceptor.Shortcut(GlobalKeyInterceptor.Key.S, GlobalKeyInterceptor.KeyModifier.Win | GlobalKeyInterceptor.KeyModifier.Alt)
         };
@@ -47,26 +48,15 @@ namespace Screenshot_Saver
         
 
 
-    }
+        }
         private void OnShortcutPressed(object? sender ,GlobalKeyInterceptor.ShortcutPressedEventArgs e)
         {
-            YesLabel.Content = "Pressed"; 
+            
+            filename = FileNameTextBox.Text;
+            SaveImage();
         }
 
-    private void AutomaticSaving()
-        {
-            
-            while (true)
-            {
-                Thread saveThread = new Thread(() => SaveImage());
-                saveThread.SetApartmentState(ApartmentState.STA);
-                saveThread.Start();
-                saveThread.Join();
-            }
-            
-            
-          
-        }
+       
      
         private bool SimilarTwoImages()
         {
@@ -79,14 +69,16 @@ namespace Screenshot_Saver
         }
         private void SaveImage()
         {
-            
+
+            int copy = FilesystemManipulation.GetLastCopy(path, filename);
             
             if (System.Windows.Clipboard.ContainsImage())
             {
                 currentPhoto = System.Windows.Clipboard.GetImage();
+               
                 if (!SimilarTwoImages())
                 {
-                    using (var fileStream = new FileStream(path +"\\"+ filename, FileMode.Create))
+                    using (var fileStream = new FileStream($"{path}\\{filename}({copy}).png", FileMode.Create))
                     {
                         BitmapEncoder encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(currentPhoto as BitmapSource));
@@ -95,7 +87,7 @@ namespace Screenshot_Saver
                 }
                 else
                 {
-                    YesLabel.Content="LA FEL";
+                   
                 }
             }
             lastPhoto = currentPhoto;
@@ -110,6 +102,7 @@ namespace Screenshot_Saver
 
             SaveImage();
             
+            
 
 
         }
@@ -121,32 +114,12 @@ namespace Screenshot_Saver
             if (fileDialog.ShowDialog()==true)
             {
                 path = fileDialog.FolderName;
-                YesLabel.Content =path;
+                
             }
             int size = 0;
-            
-            for(int i = 0; i<path.Length; i++)
-            {
-                size++;
-                if (path[i] == '\\')
-                {
-                    size++;
-                }
-            }
-            char[] filePathChar = new char[size];
-            int j = 0;
-            for(int i = 0; i<path.Length; i++)
-            {
-                filePathChar[j++] = path[i];
-                if (path[i]=='\\')
-                {
-                    filePathChar[j++] = '\\';
-                }
-            }
+            path = FilesystemManipulation.CorrectPath(path);
 
-            string correctFilePath = new string(filePathChar);
-            YesLabel.Content=correctFilePath;
-            path = correctFilePath;
+            
         }
 
         private void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
@@ -154,11 +127,6 @@ namespace Screenshot_Saver
             Manager.AddSetting("Path", path);
             Manager.AddSetting("File name", FileNameTextBox.Text);
             Manager.WriteFile();
-        }
-
-        private void AutomaticButton_Click(object sender, RoutedEventArgs e)
-        {
-            AutomaticSaving();
         }
     }
 }

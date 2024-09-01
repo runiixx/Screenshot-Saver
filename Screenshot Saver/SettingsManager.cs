@@ -14,7 +14,14 @@ namespace Screenshot_Saver
 
         public void AddSetting(string Key, string Value)
         {
-            SettingsDictionary.Add(Key, Value);
+            if (SettingsDictionary.ContainsKey(Key))
+            {
+                SettingsDictionary[Key] = Value;
+            }
+            else
+            {
+                SettingsDictionary.Add(Key, Value);
+            }
         }
 
         public string getSettingValue(string Key)

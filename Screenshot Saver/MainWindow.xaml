@@ -7,14 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="300" ResizeMode="NoResize">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <Label x:Name="YesLabel">DA</Label>
-          
-            <Button x:Name="SaveButton" HorizontalAlignment="Left" Click="SaveButton_Click">Save Screenshot</Button>
-            <TextBox x:Name="FileNameTextBox"></TextBox>
+        <StackPanel Orientation="Vertical" Margin="3" >
+            <Label x:Name="Title" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="15" Width="293"  Height="29" >Screenshot Saver</Label>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="SaveButton" HorizontalAlignment="Left" Click="SaveButton_Click">Save Screenshot</Button>
+                <Label Content="Shortcut = Win+ALt+S"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="FileNameTextBox" Width="150"></TextBox>
+                <Label>File Name</Label>
+            </StackPanel>
+                        
             <Button x:Name="SelectDirectoryButton" HorizontalAlignment="Left" Click="SelectDirectoryButton_Click">Select directory</Button>
-            <Button x:Name="SaveSettingsButton" HorizontalAlignment="Left" Click="SaveSettingsButton_Click">Save Settings</Button>
-            <Button x:Name="AutomaticButton" HorizontalAlignment="Left" Click="AutomaticButton_Click">Automatic</Button>
+            <Button x:Name="SaveSettingsButton" HorizontalAlignment="Left" Click="SaveSettingsButton_Click">Save Path and Name</Button>
+
         </StackPanel>
     </Grid>
 </Window>
