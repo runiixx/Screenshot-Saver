@@ -6,21 +6,77 @@
         xmlns:local="clr-namespace:Screenshot_Saver"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="300" ResizeMode="NoResize">
+    <Window.Resources>
+        
+        <Style TargetType="Button" x:Key="RoundButton">
+            <Setter Property="Margin" Value="0,5,0,5" />
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="150"/>
+            
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+                
+            </Style.Resources>
+        </Style>
+        <Style TargetType="Label" x:Key="Title">
+            <Setter Property="Content" Value="Screenshot Saver"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+
+        </Style>
+        <Style TargetType="TextBox" x:Key="FileName">
+            <Setter Property="Text" Value="Debug"/>
+          
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+                
+            </Style.Resources>
+        </Style>
+        
+    </Window.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="3" >
-            <Label x:Name="Title" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="15" Width="293"  Height="29" >Screenshot Saver</Label>
+        <StackPanel Orientation="Vertical" Margin="10,0,0,0" >
+            <Label x:Name="Title"
+                   Style="{StaticResource Title}"
+                   
+                   />
 
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="SaveButton" HorizontalAlignment="Left" Click="SaveButton_Click">Save Screenshot</Button>
+                <Button Style="{StaticResource RoundButton}"
+                        x:Name="SaveButton"
+                        HorizontalAlignment="Left"
+                        Click="SaveButton_Click"
+                        Content="Save screenshot"
+                        /> 
                 <Label Content="Shortcut = Win+ALt+S"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="FileNameTextBox" Width="150"></TextBox>
+                <TextBox x:Name="FileNameTextBox"
+                         Width="150"
+                         Style="{StaticResource FileName}"
+                         TextAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         />
                 <Label>File Name</Label>
             </StackPanel>
-                        
-            <Button x:Name="SelectDirectoryButton" HorizontalAlignment="Left" Click="SelectDirectoryButton_Click">Select directory</Button>
-            <Button x:Name="SaveSettingsButton" HorizontalAlignment="Left" Click="SaveSettingsButton_Click">Save Path and Name</Button>
+
+            <Button Style="{StaticResource RoundButton}"
+                    x:Name="SelectDirectoryButton"
+                    HorizontalAlignment="Left" 
+                    Click="SelectDirectoryButton_Click"
+                    Content="Select directory"
+                    />
+            <Button Style="{StaticResource RoundButton}"
+                    x:Name="SaveSettingsButton"
+                    HorizontalAlignment="Left"
+                    Click="SaveSettingsButton_Click"
+                    Content="Save path and name"
+                    /> 
 
         </StackPanel>
     </Grid>
