@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 
 namespace Screenshot_Saver
@@ -28,9 +29,11 @@ namespace Screenshot_Saver
         SettingsManager Manager;
         GlobalKeyInterceptor.KeyInterceptor _interceptor;
 
-        
+        NotifyIcon notifyIcon;
+        Boolean isShown = true;
         public MainWindow()
         {
+
             
             InitializeComponent();
             isSave = true;
@@ -45,9 +48,26 @@ namespace Screenshot_Saver
         };
             _interceptor = new GlobalKeyInterceptor.KeyInterceptor(shortcut);
             _interceptor.ShortcutPressed+=OnShortcutPressed;
-        
 
 
+
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = new System.Drawing.Icon("Resources/icon.ico");
+            notifyIcon.Visible = true;
+            notifyIcon.Click += NotifyIcon_Click;
+        }
+        private void NotifyIcon_Click(object? sender, EventArgs e)
+        {
+            isShown = !isShown;
+            if (isShown)
+            {
+                this.Show();
+                
+            }
+            else
+            {
+                this.Hide();
+            }
         }
         private void OnShortcutPressed(object? sender ,GlobalKeyInterceptor.ShortcutPressedEventArgs e)
         {
