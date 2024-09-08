@@ -36,7 +36,16 @@ namespace Screenshot_Saver
             notifyIcon.Visible = true;
             notifyIcon.Click += NotifyIcon_Click;
         }
-        
+
+
+        private void ApplicationExit(object sender, ExitEventArgs e)
+        {
+            if (notifyIcon is not null)
+            {
+                notifyIcon.Icon.Dispose();
+                notifyIcon.Dispose();
+            }
+        }      
         private void NotifyIcon_Click(object? sender, EventArgs e)
         {
             isShown = !isShown;

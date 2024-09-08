@@ -91,14 +91,16 @@ namespace Screenshot_Saver
         {
 
             int copy = FilesystemManipulation.GetLastCopy(path, filename);
-            
+            string FullPath = (copy!=0) ? $"{path}\\{filename}({copy}).png" : $"{path}\\{filename}.png";
+
+
             if (System.Windows.Clipboard.ContainsImage())
             {
                 currentPhoto = System.Windows.Clipboard.GetImage();
                
                 if (!SimilarTwoImages())
                 {
-                    using (var fileStream = new FileStream($"{path}\\{filename}({copy}).png", FileMode.Create))
+                    using (var fileStream = new FileStream(FullPath, FileMode.Create))
                     {
                         BitmapEncoder encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(currentPhoto as BitmapSource));

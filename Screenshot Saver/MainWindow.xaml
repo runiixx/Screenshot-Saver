@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Screenshot_Saver"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="300" ResizeMode="NoResize">
+        Title="MainWindow" Height="200" Width="300" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionaries/Colors.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
 
 
@@ -36,27 +37,46 @@
         <Label x:Name="Title"
            Style="{StaticResource Title}"
            Grid.Row="0"/>
-        <Button Grid.Row="1"
-        Style="{StaticResource RoundButtonStyle}"
-        x:Name="SaveButton"
-        Click="SaveButton_Click"
-        HorizontalAlignment="Left" 
-        Content="Save screenshot"/>
-        <Button Grid.Row="2"
-        Style="{StaticResource RoundButtonStyle}"
-        x:Name="SelectDirectoryButton"
-        HorizontalAlignment="Left" 
-        Click="SelectDirectoryButton_Click"
-        Content="Select directory"/>
-        <Button Grid.Row="3"
-        Style="{StaticResource RoundButtonStyle}"
-        x:Name="SaveSettingsButton"
+
+        <TextBox Grid.Row="1"
+          x:Name="FileNameTextBox"
+          Style="{StaticResource FileName}"
+          HorizontalAlignment="Left"
+          Width="150"
+          Height="30"
+          Margin="5 0 0 0"/>
+        <Label Grid.Row="1"
+        Content="File Name..."
+        VerticalAlignment="Center"
         HorizontalAlignment="Left"
-        Click="SaveSettingsButton_Click"
-        Content="Save path and name"/>
-        <TextBox x:Name="FileNameTextBox"
-                 Style="{StaticResource FileName}"
-                 Grid.Row="4"/>
+        IsHitTestVisible="False"
+        Margin="10 0 0 0"
+        Foreground="{StaticResource ControlBackground}"
+        Visibility="{Binding Text.IsEmpty, ElementName=FileNameTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        
+        <Button Grid.Row="1"
+                Margin="0 0 10 0"
+                Style="{StaticResource RoundButtonStyle}"
+                x:Name="SaveButton"
+                Click="SaveButton_Click"
+                HorizontalAlignment="Right" 
+                Content="Save screenshot"/>
+        <Button Grid.Row="2"
+                Style="{StaticResource RoundButtonStyle}"
+                x:Name="SelectDirectoryButton"
+                HorizontalAlignment="Left" 
+                Click="SelectDirectoryButton_Click"
+                Width="150"
+                Margin="10 0 0 0"
+                Content="Select directory"/>
+        <Button Grid.Row="2"
+                Margin="0 0 10 0"
+                Style="{StaticResource RoundButtonStyle}"
+                x:Name="SaveSettingsButton"
+                HorizontalAlignment="Right"
+                Click="SaveSettingsButton_Click"
+                Content="Save path and name"/>
+       
     </Grid>
 </Window>
     
