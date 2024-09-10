@@ -30,7 +30,7 @@ namespace Screenshot_Saver.ViewModels
 
         public void Execute(object parameter)
         {
-            _canExecute();
+            _execute();
         }
 
 

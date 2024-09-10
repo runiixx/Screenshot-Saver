@@ -7,16 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="200" Width="300" ResizeMode="NoResize">
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionaries/Colors.xaml"/>
-                <ResourceDictionary Source="Dictionaries/Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        </ResourceDictionary>
-
-
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
+
+    
     <Grid Grid.Column="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -29,20 +23,21 @@
 
 
 
-        <Rectangle Fill="{StaticResource Background}"/>
+        <Rectangle Fill="{DynamicResource Background}"/>
         <Rectangle Grid.Row="1"
-                   Fill="{StaticResource ControlBackground}"
+                   Fill="{DynamicResource ControlBackground}"
                    Grid.RowSpan="5"
                    />
         <Label x:Name="Title"
-           Style="{StaticResource Title}"
+           Style="{DynamicResource Title}"
            Grid.Row="0"/>
 
         <TextBox Grid.Row="1"
           x:Name="FileNameTextBox"
-          Style="{StaticResource FileName}"
+          Style="{DynamicResource FileName}"
           HorizontalAlignment="Left"
           Width="150"
+          Text="{Binding FileName,UpdateSourceTrigger=PropertyChanged}"
           Height="30"
           Margin="5 0 0 0"/>
         <Label Grid.Row="1"
@@ -51,30 +46,30 @@
         HorizontalAlignment="Left"
         IsHitTestVisible="False"
         Margin="10 0 0 0"
-        Foreground="{StaticResource ControlBackground}"
+        Foreground="{DynamicResource ControlBackground}"
         Visibility="{Binding Text.IsEmpty, ElementName=FileNameTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         
         <Button Grid.Row="1"
                 Margin="0 0 10 0"
-                Style="{StaticResource RoundButtonStyle}"
+                Style="{DynamicResource RoundButtonStyle}"
                 x:Name="SaveButton"
-                Click="SaveButton_Click"
+                Command="{Binding ISaveImage }"
                 HorizontalAlignment="Right" 
                 Content="Save screenshot"/>
         <Button Grid.Row="2"
-                Style="{StaticResource RoundButtonStyle}"
+                Style="{DynamicResource RoundButtonStyle}"
                 x:Name="SelectDirectoryButton"
                 HorizontalAlignment="Left" 
-                Click="SelectDirectoryButton_Click"
+                Command="{Binding ISelectDirectory}"
                 Width="150"
                 Margin="10 0 0 0"
                 Content="Select directory"/>
         <Button Grid.Row="2"
                 Margin="0 0 10 0"
-                Style="{StaticResource RoundButtonStyle}"
+                Style="{DynamicResource RoundButtonStyle}"
                 x:Name="SaveSettingsButton"
                 HorizontalAlignment="Right"
-                Click="SaveSettingsButton_Click"
+                Command="{Binding ISaveSettings}"
                 Content="Save path and name"/>
        
     </Grid>
