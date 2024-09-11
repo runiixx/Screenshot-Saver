@@ -9,6 +9,11 @@ namespace Screenshot_Saver
 {
     class FilesystemManipulation
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string CorrectPath(string path)
         {
             int size = 0;
@@ -34,6 +39,13 @@ namespace Screenshot_Saver
             string correctFilePath = new string(filePathChar);
             return correctFilePath;
         }
+
+        /// <summary>
+        /// Finds how many files with similar names exist
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="filename"></param>
+        /// <returns>Number of files</returns>
         public static int GetLastCopy(string path, string filename)
         {
             IEnumerable<string> files =

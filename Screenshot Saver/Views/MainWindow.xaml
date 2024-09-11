@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Screenshot_Saver"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="300" ResizeMode="NoResize">
+        Title="MainWindow" Height="200" Width="350" ResizeMode="NoResize">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
@@ -14,41 +14,50 @@
     <Grid Grid.Column="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+
         </Grid.RowDefinitions>
 
 
 
-        <Rectangle Fill="{DynamicResource Background}"/>
-        <Rectangle Grid.Row="1"
+     
+        <Rectangle Grid.Row="0"
                    Fill="{DynamicResource ControlBackground}"
                    Grid.RowSpan="5"
                    />
+        <!--Title-->
         <Label x:Name="Title"
-           Style="{DynamicResource Title}"
-           Grid.Row="0"/>
+               Style="{DynamicResource Title}"
+               Grid.Row="0"/>
 
+        <!--Settings Button-->
+        <Button VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Width="30"
+                Height="30"
+                Margin="10 0"
+                Style="{DynamicResource SettingsButton}"/>
+
+        <!--File Name Textbox-->
         <TextBox Grid.Row="1"
-          x:Name="FileNameTextBox"
-          Style="{DynamicResource FileName}"
-          HorizontalAlignment="Left"
-          Width="150"
-          Text="{Binding FileName,UpdateSourceTrigger=PropertyChanged}"
-          Height="30"
-          Margin="5 0 0 0"/>
+                 x:Name="FileNameTextBox"
+                 Style="{DynamicResource FileName}"
+                 HorizontalAlignment="Left"
+                 Width="150"
+                 Text="{Binding FileName,UpdateSourceTrigger=PropertyChanged}"
+                 Height="40"
+                 Margin="5 0 0 0"/>
         <Label Grid.Row="1"
-        Content="File Name..."
-        VerticalAlignment="Center"
-        HorizontalAlignment="Left"
-        IsHitTestVisible="False"
-        Margin="10 0 0 0"
-        Foreground="{DynamicResource ControlBackground}"
-        Visibility="{Binding Text.IsEmpty, ElementName=FileNameTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+               Content="File Name..."
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               IsHitTestVisible="False"
+               Margin="10 0 0 0"
+               Foreground="{DynamicResource Borders}"
+               Visibility="{Binding Text.IsEmpty, ElementName=FileNameTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         
+        <!--Save Image Button-->
         <Button Grid.Row="1"
                 Margin="0 0 10 0"
                 Style="{DynamicResource RoundButtonStyle}"
@@ -56,14 +65,18 @@
                 Command="{Binding ISaveImage }"
                 HorizontalAlignment="Right" 
                 Content="Save screenshot"/>
+        
+        <!--Select Directory Number-->
         <Button Grid.Row="2"
                 Style="{DynamicResource RoundButtonStyle}"
                 x:Name="SelectDirectoryButton"
                 HorizontalAlignment="Left" 
                 Command="{Binding ISelectDirectory}"
-                Width="150"
+                Width="145"
                 Margin="10 0 0 0"
                 Content="Select directory"/>
+        
+        <!--Save Settings Button-->
         <Button Grid.Row="2"
                 Margin="0 0 10 0"
                 Style="{DynamicResource RoundButtonStyle}"

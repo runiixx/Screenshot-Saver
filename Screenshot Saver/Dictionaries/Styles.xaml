@@ -6,18 +6,22 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Margin" Value="5 5 0 5"/>
-        <Setter Property="Foreground" Value="#FFFFFFFF"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="#FFF6F6F6"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5 0 0 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
                             
                             CornerRadius="4">
                         <ContentPresenter HorizontalAlignment="Center"
@@ -38,7 +42,7 @@
    
     <Style TargetType="Label" x:Key="Title">
         <Setter Property="Content" Value="Screenshot Saver"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Margin" Value="5,0,0,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -52,6 +56,12 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="Background" Value="{StaticResource TextBoxBackground}"/>
+        <Setter Property="Foreground" Value="#FFF6f6f6"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -63,11 +73,13 @@
                         <ScrollViewer x:Name="PART_ContentHost"
                                       VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                       />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="#ff28536b"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource AccentDarkClick}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -75,4 +87,28 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Button" x:Key="SettingsButton">
+        <Setter Property="Background" Value="{StaticResource AccentDark}"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="5">
+                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource AccentDarkClick}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

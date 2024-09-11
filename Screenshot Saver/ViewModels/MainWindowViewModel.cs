@@ -16,10 +16,23 @@ namespace Screenshot_Saver.ViewModels
 
         private string path;
         private SettingsManager Manager;
-        private string FileName;
+        private string _fileName;
+        public string FileName
+        {
+            get
+            {
+                return _fileName;
+            }
+            set
+            {
+                _fileName=value;
+                OnPropertyChanged(nameof(FileName));
+            }
+        }
         private BitmapSource CurrentPhoto;
         private BitmapSource LastPhoto;
 
+       
         private GlobalKeyInterceptor.KeyInterceptor KeyInterceptor;
 
         public ICommand ISelectDirectory => new RelayCommand(SelectDirectory);
@@ -46,9 +59,9 @@ namespace Screenshot_Saver.ViewModels
 
         private void SaveImage()
         {
+            
             int Copy = FilesystemManipulation.GetLastCopy(path, FileName);
-            string FullPath = (Copy!=0) ? $"{path}\\{FileName}({Copy}).png" : $"{path}\\{FileName}.png";
-
+            string FullPath=(Copy!=0) ? Path.Combine(path, $"{FileName}({Copy}).png") : Path.Combine(path, $"{FileName}.png");
 
             if (System.Windows.Clipboard.ContainsImage())
             {
@@ -70,22 +83,53 @@ namespace Screenshot_Saver.ViewModels
 
         private bool SimilarTwoImages()
         {
-            return (LastPhoto is not null) ? LastPhoto.Width==CurrentPhoto.Width ||
-                                         LastPhoto.Height==CurrentPhoto.Height
-                                       : false;
+            if(LastPhoto is null)
+                return false;
+
+
+            Bitmap LastPhotoBitmap = BitmapSourceToBitmap(LastPhoto);
+            Bitmap CurrentPhotoBitmap=BitmapSourceToBitmap(CurrentPhoto);
+
+            bool ok = true;
+            for (int i = 0; i<LastPhoto.Height; i++)
+            {
+                for (int j = 0; j<LastPhoto.Width; j++)
+                {
+                    if (!LastPhotoBitmap.GetPixel(j,i).Equals(CurrentPhotoBitmap.GetPixel(j,i))){
+                        ok = false;
+                    }
+                }
+            }
+            return ok;
+        }
+
+        private System.Drawing.Bitmap BitmapSourceToBitmap(BitmapSource BitmapSource)
+        {
+            System.Drawing.Bitmap Bipmap;
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder Encoder = new BmpBitmapEncoder();
+                Encoder.Frames.Add(BitmapFrame.Create(CurrentPhoto));
+                Encoder.Save(outStream);
+                Bipmap=new System.Drawing.Bitmap(outStream);
+            }
+            return Bipmap;
+
         }
         public MainWindowViewModel()
         {
+            FileName="def";
+            OnPropertyChanged(FileName);
             Manager=new SettingsManager();
             Manager.ReadFile();
 
             FileName= (Manager.getSettingValue("File name") is null) ? "default" : Manager.getSettingValue("File name");
             path=(Manager.getSettingValue("Path") is null) ? "C:\\" : Manager.getSettingValue("Path");
 
-            GlobalKeyInterceptor.Shortcut[] Shortcuts = new GlobalKeyInterceptor.Shortcut[]
-            {
+            GlobalKeyInterceptor.Shortcut[] Shortcuts =
+            [
                 new GlobalKeyInterceptor.Shortcut(GlobalKeyInterceptor.Key.S,GlobalKeyInterceptor.KeyModifier.Win | GlobalKeyInterceptor.KeyModifier.Alt)
-            };
+            ];
 
             KeyInterceptor = new GlobalKeyInterceptor.KeyInterceptor(Shortcuts);
             KeyInterceptor.ShortcutPressed+=OnShortcutPressed;

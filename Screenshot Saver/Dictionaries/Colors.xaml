@@ -2,12 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--App Background-->
     <SolidColorBrush x:Key="Background" Color="#FFCBCBDC"/>
-    <SolidColorBrush x:Key="AccentDark" Color="#FF7ea8be"/>
-    <SolidColorBrush x:Key="AccentDarkOver" Color="#ff28536b"/>
-    <SolidColorBrush x:Key="AccentDarkClick" Color="#FF8fb9cf"/>
-    <SolidColorBrush x:Key="ControlBackground" Color="#FFDCDCED"/>
-    <SolidColorBrush x:Key="Heading1" Color="#FF002855"/>
-    <SolidColorBrush x:Key="TextBoxBackground" Color="#FF2688EA"/>
+    <SolidColorBrush x:Key="AccentDark" Color="#FF2B2B2B"/>
+    <SolidColorBrush x:Key="AccentDarkOver" Color="#ff3D3D3D"/>
+    <SolidColorBrush x:Key="AccentDarkClick" Color="#FF323232"/>
+    <SolidColorBrush x:Key="ControlBackground" Color="#FF202020"/>
+    <SolidColorBrush x:Key="Heading1" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#FF272727"/>
 
-    <SolidColorBrush x:Key="Borders" Color="#FFf6f0ed"/>
+    <SolidColorBrush x:Key="Borders" Color="#FF9E9E9E"/>
 </ResourceDictionary>

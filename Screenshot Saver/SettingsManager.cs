@@ -24,6 +24,11 @@ namespace Screenshot_Saver
             }
         }
 
+        /// <summary>
+        /// Gets a setting item
+        /// </summary>
+        /// <param name="Key"></param>
+        /// <returns>Returns the value of a setting</returns>
         public string getSettingValue(string Key)
         {
             try
@@ -36,9 +41,22 @@ namespace Screenshot_Saver
             }
         }
 
-        public  void  ReadFile()
+        /// <summary>
+        /// Reads the file and extracts the settings
+        /// </summary>
+        public void ReadFile()
         {
-            StreamReader streamReader = new StreamReader(Directory.GetCurrentDirectory() + "\\Settings.txt");
+
+            string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data", "Settings.txt" };
+            if (!Directory.Exists(Path.Combine(fullPathArray[0], fullPathArray[1])))
+              
+                Directory.CreateDirectory(Path.Combine(fullPathArray[0], fullPathArray[1]));
+            if (!File.Exists(Path.Combine(fullPathArray)))
+            {
+                File.Create(Path.Combine(fullPathArray));
+            }
+            string fullPath = Path.Combine(fullPathArray);
+            StreamReader streamReader = new StreamReader(fullPath);
             try
             {
                 string line = streamReader.ReadLine();
@@ -54,9 +72,14 @@ namespace Screenshot_Saver
             catch (IOException) { }
         }
 
+
+        /// <summary>
+        /// Writes Settings to the file
+        /// </summary>
         public  void WriteFile()
         {
-            StreamWriter streamWriter = new StreamWriter(Directory.GetCurrentDirectory()+ "\\Settings.txt",false);
+            string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data", "Settings.txt" };
+            StreamWriter streamWriter = new StreamWriter(Path.Combine(fullPathArray),false);
             try
             {
                 foreach(KeyValuePair<string,string> setting in SettingsDictionary)
