@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Screenshot_Saver.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -37,7 +38,7 @@ namespace Screenshot_Saver.ViewModels
 
         public ICommand ISelectDirectory => new RelayCommand(SelectDirectory);
         public ICommand ISaveSettings => new RelayCommand(SaveSettings);
-
+        public ICommand IOpenSettingsWindow => new RelayCommand(OpenSettingsWindow);
         public ICommand ISaveImage => new RelayCommand(SaveImage);
         private void SelectDirectory()
         {
@@ -50,6 +51,11 @@ namespace Screenshot_Saver.ViewModels
             //path=FilesystemManipulation.CorrectPath(path);
         }
 
+        private void OpenSettingsWindow()
+        {
+            SettingsWindow SettingsWindow=new SettingsWindow();
+            SettingsWindow.Show();
+        }
         private void SaveSettings()
         {
             Manager.AddSetting("Path", path);
