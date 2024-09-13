@@ -38,7 +38,6 @@
                                                         From="{StaticResource AccentDarkColor}"
                                                         To="{StaticResource AccentDarkOverColor}"
                                                         Duration="0:0:0:0.2"/>
-
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -61,7 +60,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-   
+
     <Style TargetType="Label" x:Key="Title">
         <Setter Property="Content" Value="Screenshot Saver"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
@@ -163,6 +162,8 @@
         <Setter Property="BorderBrush" Value="{StaticResource Borders}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0 0 30 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type control:ToggleSwitch}">
@@ -177,20 +178,23 @@
                                  Width="24"
                                  x:Name="ep"/>
                     </Border>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="ep" Property="HorizontalAlignment" Value="Right"/>
-                            
+
+                            <Setter TargetName="bk" Property="Background" Value="{StaticResource Borders}"/>
                             <Setter TargetName="ep" Property="Width" Value="24"/>
+                            <Setter TargetName="ep" Property="Fill" Value="{StaticResource AccentDarkOver}"/>
                             <Trigger.EnterActions>
-                                <BeginStoryboard>
+                                <BeginStoryboard x:Name="IsCheckedBeginStoryBoard">
                                     <Storyboard>
                                         <ColorAnimation To="{StaticResource BordersColor}"
                                                         From="{StaticResource AccentDarkColor}"
                                                         Storyboard.TargetProperty="Background.Color"
                                                         Storyboard.TargetName="bk"
                                                         Duration="0:0:0:0.2"/>
-                                        
+
                                         <DoubleAnimation Storyboard.TargetName="ep"
                                                          Storyboard.TargetProperty="Width"
                                                          To="18"
@@ -201,7 +205,7 @@
                                                          To="18"
                                                          From="24"
                                                          Duration="0:0:0:0.2"/>
-                                        
+
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -228,26 +232,23 @@
 
 
                             </Trigger.ExitActions>
+
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{StaticResource AccentDarkOver}"/>
                             <Trigger.EnterActions>
-                                <BeginStoryboard>
+                                <BeginStoryboard x:Name="IsMouseOverBeginStoryboard">
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="bk"
-                                                        Storyboard.TargetProperty="Background.Color"
-                                                        From="{StaticResource AccentDarkColor}"
-                                                        To="{StaticResource AccentDarkOverColor}"
-                                                        Duration="0:0:0:0.2"/>
+
                                         <DoubleAnimation Storyboard.TargetName="ep"
                                                          Storyboard.TargetProperty="Width"
                                                          From="24"
-                                                         To="26"
+                                                         To="20"
                                                          Duration="0:0:0:0.2"/>
                                         <DoubleAnimation Storyboard.TargetName="ep"
                                                          Storyboard.TargetProperty="Height"
                                                          From="24"
-                                                         To="26"
+                                                         To="20"
                                                          Duration="0:0:0:0.2"/>
 
                                     </Storyboard>
@@ -256,19 +257,15 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="bk"
-                                                        Storyboard.TargetProperty="Background.Color"
-                                                        From="{StaticResource AccentDarkOverColor}"
-                                                        To="{StaticResource AccentDarkColor}"
-                                                        Duration="0:0:0:0.2"/>
+
                                         <DoubleAnimation Storyboard.TargetName="ep"
                                                          Storyboard.TargetProperty="Width"
-                                                         From="26"
+                                                         From="20"
                                                          To="24"
                                                          Duration="0:0:0:0.2"/>
                                         <DoubleAnimation Storyboard.TargetName="ep"
                                                          Storyboard.TargetProperty="Height"
-                                                         From="26"
+                                                         From="20"
                                                          To="24"
                                                          Duration="0:0:0:0.2"/>
                                     </Storyboard>
@@ -285,15 +282,16 @@
         <Setter Property="Fill" Value="{StaticResource SettingsItemFrame}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="RadiusX" Value="10"/>
-        <Setter Property="RadiusY" Value="10"/>
+        <Setter Property="RadiusX" Value="5"/>
+        <Setter Property="RadiusY" Value="5"/>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="Height" Value="60"/>
-        <Setter Property="Width" Value="770"/>
+        <Setter Property="Width" Value="750"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill" Value="{StaticResource AccentDarkOver}"/>
                 <Trigger.EnterActions>
-                    <BeginStoryboard>
+                    <BeginStoryboard >
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="Fill.Color"
                                             From="{StaticResource SettingsItemFrameColor}"
@@ -301,14 +299,13 @@
                                             Duration="0:0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
-                    
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                            To="{StaticResource SettingsItemFrameColor}"
                                             From="{StaticResource AccentDarkOverColor}"
+                                            To="{StaticResource SettingsItemFrameColor}"
                                             Duration="0:0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
@@ -316,4 +313,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="TextBlock" x:Key="SettingsTextStyle">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="50 0 0 0"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
 </ResourceDictionary>

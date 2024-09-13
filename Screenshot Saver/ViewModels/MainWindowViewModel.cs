@@ -15,6 +15,8 @@ namespace Screenshot_Saver.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        private bool autosave;
+
         private string path;
         private SettingsManager Manager;
         private string _fileName;
@@ -28,6 +30,13 @@ namespace Screenshot_Saver.ViewModels
             {
                 _fileName=value;
                 OnPropertyChanged(nameof(FileName));
+                SettingsManager Manager = new SettingsManager();
+                Manager.ReadFile();
+                if (Manager.getSettingValue("AutoSave").Equals("True"))
+                {
+                    Manager.AddSetting("File name", value);
+                    Manager.WriteFile();
+                }
             }
         }
         private BitmapSource CurrentPhoto;
@@ -47,7 +56,12 @@ namespace Screenshot_Saver.ViewModels
             {
                 path=FolderDialog.FolderName;
             }
-
+            if (Manager.getSettingValue("AutoSave").Equals("True"))
+            {
+                Manager.AddSetting("Path", path);
+                Manager.WriteFile();
+            }
+            
             //path=FilesystemManipulation.CorrectPath(path);
         }
 
@@ -55,6 +69,8 @@ namespace Screenshot_Saver.ViewModels
         {
             SettingsWindow SettingsWindow=new SettingsWindow();
             SettingsWindow.Show();
+
+            
         }
         private void SaveSettings()
         {

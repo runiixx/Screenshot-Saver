@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Screenshot_Saver
 {
-    internal class SettingsManager
+    public class SettingsManager
     {
         private Dictionary<string, string> SettingsDictionary = new Dictionary<string, string>();
 

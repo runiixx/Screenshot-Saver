@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Screenshot_Saver.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Screenshot_Saver.Views
         public SettingsWindow()
         {
             InitializeComponent();
+            DataContext= new SettingsWindowViewModel();
         }
     }
 }

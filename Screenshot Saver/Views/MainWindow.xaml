@@ -13,7 +13,7 @@
     
     <Grid Grid.Column="1">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
 
@@ -34,9 +34,9 @@
         <!--Settings Button-->
         <Button VerticalAlignment="Center"
                 HorizontalAlignment="Right"
-                Width="30"
-                Height="30"
-                Margin="10 0"
+                Width="40"
+                Height="40"
+                Margin="15 0"
                 Style="{DynamicResource SettingsButton}"
                 Command="{Binding IOpenSettingsWindow}"/>
 
