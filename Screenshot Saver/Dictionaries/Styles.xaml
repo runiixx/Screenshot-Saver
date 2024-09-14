@@ -1,59 +1,51 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:control="clr-namespace:Screenshot_Saver">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="clr-namespace:Screenshot_Saver">
 
+
+    <!--  Round Button Style  -->
     <Style x:Key="RoundButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource AccentDark}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Margin" Value="5 5 0 5"/>
-        <Setter Property="Foreground" Value="#FFF6F6F6"/>
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="5 0 0 0"/>
+        <Style.Resources />
+        <Setter Property="Background" Value="{DynamicResource AccentDark}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentDark}" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonTextBrush}" />
+        <Setter Property="Width" Value="150" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="{TemplateBinding Padding}"
-                            
-                            CornerRadius="4">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{StaticResource AccentDarkOver}"/>
                             <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                                                        From="{StaticResource AccentDarkColor}"
-                                                        To="{StaticResource AccentDarkOverColor}"
-                                                        Duration="0:0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Start}" />
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                                                        From="{StaticResource AccentDarkOverColor}"
-                                                        To="{StaticResource AccentDarkColor}"
-                                                        Duration="0:0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Stop}" />
                             </Trigger.ExitActions>
                         </Trigger>
+
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="{StaticResource AccentDarkClick}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Click.Start}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Click.Stop}"/>
+                            </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -61,93 +53,76 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Label" x:Key="Title">
-        <Setter Property="Content" Value="Screenshot Saver"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Margin" Value="5,0,0,0"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{StaticResource Heading1}"/>
+    <!--  Window Title  -->
+    <Style x:Key="Title" TargetType="Label">
+        <Setter Property="Content" Value="Screenshot Saver" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="1,0,0,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="White" />
 
 
     </Style>
-    <Style TargetType="TextBox" x:Key="FileName">
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Borders}"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="AcceptsReturn" Value="True"/>
-        <Setter Property="Background" Value="{StaticResource TextBoxBackground}"/>
-        <Setter Property="Foreground" Value="#FFF6f6f6"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Cursor" Value="IBeam"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+    <!--  Filename Textbox  -->
+    <Style x:Key="FileName" TargetType="TextBox">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{StaticResource Borders}" />
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="Background" Value="{StaticResource TextBoxBackground}" />
+        <Setter Property="Foreground" Value="#FFF6f6f6" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Cursor" Value="IBeam" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="5,0,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border Background="{TemplateBinding Background}"
-                            Margin="{TemplateBinding Margin}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="4">
-                        <ScrollViewer x:Name="PART_ContentHost"
-                                      VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                      HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      />
+                    <Border
+                        Margin="{TemplateBinding Margin}"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4">
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="{StaticResource AccentDarkClick}"/>
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
-                                                        From="{StaticResource BordersColor}"
-                                                        To="{StaticResource AccentDarkClickColor}"
-                                                        Duration="0:0:0:0.2"/>
-
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
-                                                        From="{StaticResource AccentDarkClickColor}"
-                                                        To="{StaticResource BordersColor}"
-                                                        Duration="0:0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" />
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="SettingsButton">
-        <Setter Property="Background" Value="{StaticResource AccentDark}"/>
-        <Setter Property="Cursor" Value="IBeam"/>
+    <!--  Settings Button  -->
+    <Style x:Key="SettingsButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentDark}" />
+        <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="5">
-                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}"/>
+                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Start}" />
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Stop}" />
+                            </Trigger.ExitActions>
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentDarkClick}"/>
-                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True" />
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -155,121 +130,56 @@
     </Style>
 
     <Style x:Key="ToggleSwitchStyle1" TargetType="{x:Type control:ToggleSwitch}">
-        <Setter Property="MaxHeight" Value="30"/>
-        <Setter Property="MaxWidth" Value="60"/>
-        <Setter Property="MinHeight" Value="30"/>
-        <Setter Property="MinWidth" Value="60"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Borders}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Margin" Value="0 0 30 0"/>
+        <Setter Property="MaxHeight" Value="30" />
+        <Setter Property="MaxWidth" Value="60" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="MinWidth" Value="60" />
+        <Setter Property="BorderBrush" Value="{StaticResource Borders}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="0,0,30,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type control:ToggleSwitch}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{StaticResource AccentDarkClick}"
-                            CornerRadius="15"
-                            x:Name="bk">
-                        <Ellipse Fill="{StaticResource Borders}"
-                                 HorizontalAlignment="Left"
-                                 Margin="2"
-                                 Width="24"
-                                 x:Name="ep"/>
+                    <Border
+                        x:Name="bk"
+                        Background="{StaticResource AccentDarkClick}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="15">
+                        <Ellipse
+                            x:Name="ep"
+                            Width="24"
+                            Margin="2"
+                            HorizontalAlignment="Left"
+                            Fill="{StaticResource Borders}" />
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="ep" Property="HorizontalAlignment" Value="Right"/>
+                            <Setter TargetName="ep" Property="HorizontalAlignment" Value="Right" />
 
-                            <Setter TargetName="bk" Property="Background" Value="{StaticResource Borders}"/>
-                            <Setter TargetName="ep" Property="Width" Value="24"/>
-                            <Setter TargetName="ep" Property="Fill" Value="{StaticResource AccentDarkOver}"/>
+                            <Setter TargetName="bk" Property="Background" Value="{StaticResource Borders}" />
+                            <Setter TargetName="ep" Property="Width" Value="24" />
+                            <Setter TargetName="ep" Property="Fill" Value="{StaticResource AccentDarkOver}" />
                             <Trigger.EnterActions>
-                                <BeginStoryboard x:Name="IsCheckedBeginStoryBoard">
-                                    <Storyboard>
-                                        <ColorAnimation To="{StaticResource BordersColor}"
-                                                        From="{StaticResource AccentDarkColor}"
-                                                        Storyboard.TargetProperty="Background.Color"
-                                                        Storyboard.TargetName="bk"
-                                                        Duration="0:0:0:0.2"/>
-
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Width"
-                                                         To="18"
-                                                         From="24"
-                                                         Duration="0:0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Height"
-                                                         To="18"
-                                                         From="24"
-                                                         Duration="0:0:0:0.2"/>
-
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswitch.Check.Start}"/>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation From="{StaticResource BordersColor}"
-                                                        To="{StaticResource AccentDarkColor}"
-                                                        Storyboard.TargetProperty="Background.Color"
-                                                        Storyboard.TargetName="bk"
-                                                        Duration="0:0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Width"
-                                                         From="18"
-                                                         To="24"
-                                                         Duration="0:0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Height"
-                                                         From="18"
-                                                         To="24"
-                                                         Duration="0:0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswitch.Check.Stop}"/>
 
 
                             </Trigger.ExitActions>
 
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}"/>
+                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}" />
                             <Trigger.EnterActions>
-                                <BeginStoryboard x:Name="IsMouseOverBeginStoryboard">
-                                    <Storyboard>
-
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Width"
-                                                         From="24"
-                                                         To="20"
-                                                         Duration="0:0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Height"
-                                                         From="24"
-                                                         To="20"
-                                                         Duration="0:0:0:0.2"/>
-
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswtich.Click.Start}"/>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Width"
-                                                         From="20"
-                                                         To="24"
-                                                         Duration="0:0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetName="ep"
-                                                         Storyboard.TargetProperty="Height"
-                                                         From="20"
-                                                         To="24"
-                                                         Duration="0:0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswtich.Click.Stop}"/>
                             </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -279,47 +189,33 @@
     </Style>
 
     <Style x:Key="SettingItemFrame" TargetType="Rectangle">
-        <Setter Property="Fill" Value="{StaticResource SettingsItemFrame}"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="RadiusX" Value="5"/>
-        <Setter Property="RadiusY" Value="5"/>
-        <Setter Property="Margin" Value="10"/>
-        <Setter Property="Height" Value="60"/>
-        <Setter Property="Width" Value="750"/>
+        <Setter Property="Fill" Value="{StaticResource SettingsItemFrame}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="RadiusX" Value="5" />
+        <Setter Property="RadiusY" Value="5" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="750" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Fill" Value="{StaticResource AccentDarkOver}"/>
+                <Setter Property="Fill" Value="{StaticResource AccentDarkOver}" />
                 <Trigger.EnterActions>
-                    <BeginStoryboard >
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                            From="{StaticResource SettingsItemFrameColor}"
-                                            To="{StaticResource AccentDarkOverColor}"
-                                            Duration="0:0:0:0.2"/>
-                        </Storyboard>
-                    </BeginStoryboard>
+                    <BeginStoryboard Storyboard="{DynamicResource SettingsItemFrame.Hover.Start}"/>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                            From="{StaticResource AccentDarkOverColor}"
-                                            To="{StaticResource SettingsItemFrameColor}"
-                                            Duration="0:0:0:0.2"/>
-                        </Storyboard>
-                    </BeginStoryboard>
+                    <BeginStoryboard Storyboard="{DynamicResource SettingsItemFrame.Hover.Stop}"/>
                 </Trigger.ExitActions>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="SettingsTextStyle">
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="50 0 0 0"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="16"/>
+    <Style x:Key="SettingsTextStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="50,0,0,0" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="16" />
     </Style>
 
 </ResourceDictionary>

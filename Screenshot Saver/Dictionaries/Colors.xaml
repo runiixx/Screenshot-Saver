@@ -2,18 +2,25 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--App Background-->
     <SolidColorBrush x:Key="Background" Color="#FFCBCBDC"/>
+    
+    <!--AccentColors-->
     <SolidColorBrush x:Key="AccentDark" Color="#FF2B2B2B"/>
     <SolidColorBrush x:Key="AccentDarkOver" Color="#ff3D3D3D"/>
     <SolidColorBrush x:Key="AccentDarkClick" Color="#FF323232"/>
+
+
     <SolidColorBrush x:Key="ControlBackground" Color="#FF202020"/>
-    <SolidColorBrush x:Key="Heading1" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="TextBoxBackground" Color="#FF272727"/>
     <SolidColorBrush x:Key="SettingsItemFrame" Color="#FF2B2B2B"/>
 
+    <SolidColorBrush x:Key="ButtonTextBrush" Color="#FFF6F6F6"/>
+
     <SolidColorBrush x:Key="Borders" Color="#FF9E9E9E"/>
 
+    <!--For Animations-->
     <Color x:Key="AccentDarkColor">#FF2B2B2B</Color>
     <Color x:Key="BordersColor">#FF9E9E9E</Color>
+    <Color x:Key="BordersColorOver">#FFBFBFBF</Color>
     <Color x:Key="AccentDarkOverColor">#FF3D3D3D</Color>
     <Color x:Key="SettingsItemFrameColor">#FF2B2B2B</Color>
     <Color x:Key="AccentDarkClickColor">#FF323232</Color>

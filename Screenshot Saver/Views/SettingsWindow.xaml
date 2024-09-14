@@ -12,13 +12,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         
-        <Rectangle Fill="{StaticResource ControlBackground}"
-                   Grid.RowSpan="2"/>
+        <Rectangle Fill="{DynamicResource ControlBackground}"
+                   Grid.RowSpan="3"/>
         <Label Content="Settings"
-               Style="{StaticResource Title}"/>
+               Style="{DynamicResource Title}"/>
+        
+        
         <Rectangle Style="{DynamicResource SettingItemFrame}"
                    Grid.Row="1"/>
 
@@ -26,7 +29,16 @@
                               IsChecked="{Binding AutoSave, UpdateSourceTrigger=PropertyChanged}"
                               Grid.Row="1"/>
         <TextBlock Text="Auto save path and name"
-                   Style="{StaticResource SettingsTextStyle}"
+                   Style="{DynamicResource SettingsTextStyle}"
                    Grid.Row="1"/>
+
+        <Rectangle Style="{DynamicResource SettingItemFrame}"
+                   Grid.Row="2"/>
+        <control:ToggleSwitch Style="{DynamicResource ToggleSwitchStyle1}"
+                              IsChecked="{Binding DarkTheme,UpdateSourceTrigger=PropertyChanged}"
+                              Grid.Row="2"/>
+        <TextBlock Style="{DynamicResource SettingsTextStyle}"
+                   Grid.Row="2"
+                   Text="Dark mode"/>
     </Grid>
 </Window>

@@ -11,6 +11,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionaries/Colors.xaml"/>
                 <ResourceDictionary Source="Dictionaries/Styles.xaml"/>
+                <ResourceDictionary Source="Dictionaries/Storyboards.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>

@@ -1,0 +1,121 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Storyboard x:Key="Storyboard.Hover.Start">
+        <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                    From="{StaticResource AccentDarkColor}"
+                    To="{StaticResource AccentDarkOverColor}"
+                    Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Storyboard.Hover.Stop">
+        <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                    From="{StaticResource AccentDarkOverColor}"
+                    To="{StaticResource AccentDarkColor}"
+                    Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Storyboard.Click.Start">
+        <ColorAnimation
+            Storyboard.TargetProperty="Background.Color"
+            From="{StaticResource AccentDarkOverColor}"
+            To="{StaticResource AccentDarkClickColor}"
+            Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Storyboard.Click.Stop">
+        <ColorAnimation
+            Storyboard.TargetProperty="Background.Color"
+            From="{StaticResource AccentDarkClickColor}"
+            To="{StaticResource AccentDarkColor}"
+            Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Storyboard.Toggleswitch.Check.Start">
+        <ColorAnimation
+            Storyboard.TargetName="bk"
+            Storyboard.TargetProperty="Background.Color"
+            From="{StaticResource AccentDarkColor}"
+            To="{StaticResource BordersColor}"
+            Duration="0:0:0:0.2"/>
+
+        <DoubleAnimation
+            Storyboard.TargetName="ep"
+            Storyboard.TargetProperty="Width"
+            From="24"
+            To="18"
+            Duration="0:0:0:0.2"/>
+        <DoubleAnimation
+            Storyboard.TargetName="ep"
+            Storyboard.TargetProperty="Height"
+            From="24"
+            To="18"
+            Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Storyboard.Toggleswitch.Check.Stop">
+        <ColorAnimation
+            Storyboard.TargetName="bk"
+            Storyboard.TargetProperty="Background.Color"
+            From="{StaticResource BordersColor}"
+            To="{StaticResource AccentDarkColor}"
+            Duration="0:0:0:0.2"/>
+        <DoubleAnimation
+            Storyboard.TargetName="ep"
+            Storyboard.TargetProperty="Width"
+            From="18"
+            To="24"
+            Duration="0:0:0:0.2"/>
+        <DoubleAnimation
+            Storyboard.TargetName="ep"
+            Storyboard.TargetProperty="Height"
+            From="18"
+            To="24"
+            Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Storyboard.Toggleswtich.Click.Start">
+        <DoubleAnimation 
+            Storyboard.TargetName="ep"
+            Storyboard.TargetProperty="Width"
+            From="24"
+            To="20"
+            Duration="0:0:0:0.2"/>
+        <DoubleAnimation
+            Storyboard.TargetName="ep"
+            Storyboard.TargetProperty="Height"
+            From="24"
+            To="20"
+            Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Storyboard.Toggleswtich.Click.Stop">
+        <DoubleAnimation 
+        Storyboard.TargetName="ep"
+        Storyboard.TargetProperty="Width"
+        To="24"
+        From="20"
+        Duration="0:0:0:0.2"/>
+        <DoubleAnimation
+        Storyboard.TargetName="ep"
+        Storyboard.TargetProperty="Height"
+        To="24"
+        From="20"
+        Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="SettingsItemFrame.Hover.Start">
+        <ColorAnimation 
+            Storyboard.TargetProperty="Fill.Color"
+            From="{StaticResource SettingsItemFrameColor}"
+            To="{StaticResource AccentDarkOverColor}"
+            Duration="0:0:0:0.2"/>
+    </Storyboard>
+
+    <Storyboard x:Key="SettingsItemFrame.Hover.Stop">
+        <ColorAnimation
+            Storyboard.TargetProperty="Fill.Color"
+            From="{StaticResource AccentDarkOverColor}"
+            To="{StaticResource SettingsItemFrameColor}"
+            Duration="0:0:0:0.2"/>
+    </Storyboard>
+</ResourceDictionary>

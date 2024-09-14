@@ -45,6 +45,22 @@ namespace Screenshot_Saver.ViewModels
             }
         }
 
+        private bool _darkTheme;
+        public bool DarkTheme
+        {
+            get
+            {
+                return _darkTheme;
+            }
+            set
+            {
+                _darkTheme= value;
+
+                OnPropertyChanged(nameof(DarkTheme));
+                
+            }
+        }
+
   
         public SettingsWindowViewModel()
         {
@@ -52,7 +68,10 @@ namespace Screenshot_Saver.ViewModels
             Manager=new SettingsManager();
             Manager.ReadFile();
             AutoSave = Manager.getSettingValue("AutoSave").Equals("True");
+            DarkTheme = true;
         }
+
+      
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
