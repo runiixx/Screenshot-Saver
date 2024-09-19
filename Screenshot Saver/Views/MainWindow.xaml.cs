@@ -13,8 +13,8 @@ using System.Data.Common;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Screenshot_Saver.ViewModels;
-using Screenshot_Saver.ViewModels;
 using System.Runtime.InteropServices;
+using Screenshot_Saver.Utils;
 
 
 namespace Screenshot_Saver
@@ -24,8 +24,10 @@ namespace Screenshot_Saver
     /// </summary>
     public partial class MainWindow : Window
     {
-        [DllImport("Kernel32")]
-        public static extern void AllocConsole();
+
+
+        private bool isNotifyIconVisible;
+        private bool dublicate = true;
         public MainWindow()
         {
 
@@ -33,7 +35,26 @@ namespace Screenshot_Saver
             InitializeComponent();
             DataContext= new MainWindowViewModel();
 
-           
+            SettingsManager settingsManager = new SettingsManager();
+            settingsManager.ReadFile();
+
+            if (settingsManager.getSettingValue("EnableSystemTrayIcon").Equals("True") && dublicate)
+            {
+                dublicate=false;
+                NotifyIcon notifyIcon = new NotifyIcon();
+                notifyIcon.Icon =new System.Drawing.Icon("Resources/icon.ico");
+                notifyIcon.Visible = true;
+                notifyIcon.Click += NotifyIcon_Click;
+                isNotifyIconVisible = true;
+            }
+          
+        }
+
+        private protected void NotifyIcon_Click(object sender, EventArgs e)
+        {
+            isNotifyIconVisible = !isNotifyIconVisible;
+            if (isNotifyIconVisible) { this.Show(); }
+            else { this.Hide(); }
         }
        
     }

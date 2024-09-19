@@ -64,16 +64,52 @@ namespace Screenshot_Saver.ViewModels
 
                 if (value)
                 {
-                    AppTheme.ChangeTheme(new Uri("Dictionaries/DarkThemeColors.xaml", UriKind.Relative));
+                    //AppTheme.ChangeTheme(new Uri("Dictionaries/DarkThemeColors.xaml", UriKind.Relative));
+                    AppTheme.DarkTheme();
                 }
                 else
                 {
-                    AppTheme.ChangeTheme(new Uri("Dictionaries/LightThemeColors.xaml", UriKind.Relative));
+                    //AppTheme.ChangeTheme(new Uri("Dictionaries/LightThemeColors.xaml", UriKind.Relative));
+                    AppTheme.LightTheme();
                 }
             }
         }
 
-        
+        private bool _saveCopies;
+
+        public bool SaveCopies
+        {
+            get
+            {
+                return _saveCopies;
+            }
+            set
+            {
+                _saveCopies= value;
+                OnPropertyChanged(nameof(SaveCopies));
+                Manager.ReadFile();
+                Manager.AddSetting("SaveCopies", value.ToString());
+                Manager.WriteFile();
+            }
+        }
+
+        private bool _enableSystemTrayIcon;
+
+        public bool EnableSystemTrayIcon
+        {
+            get
+            {
+                return _enableSystemTrayIcon;
+            }
+            set
+            {
+                _enableSystemTrayIcon = value;
+                OnPropertyChanged(nameof(EnableSystemTrayIcon));
+                Manager.ReadFile();
+                Manager.AddSetting("EnableSystemTrayIcon", value.ToString());
+                Manager.WriteFile();
+            }
+        }
   
         public SettingsWindowViewModel()
         {
@@ -82,6 +118,8 @@ namespace Screenshot_Saver.ViewModels
             Manager.ReadFile();
             AutoSave = Manager.getSettingValue("AutoSave").Equals("True");
             DarkTheme = Manager.getSettingValue("DarkTheme").Equals("True");
+            SaveCopies = Manager.getSettingValue("SaveCopies").Equals("True");
+            EnableSystemTrayIcon = Manager.getSettingValue("EnableSystemTrayIcon").Equals("True");
             //DarkTheme = true;
         }
 

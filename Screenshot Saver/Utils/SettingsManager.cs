@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Screenshot_Saver
+namespace Screenshot_Saver.Utils
 {
     public class SettingsManager
     {
@@ -49,7 +49,7 @@ namespace Screenshot_Saver
 
             string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data", "Settings.txt" };
             if (!Directory.Exists(Path.Combine(fullPathArray[0], fullPathArray[1])))
-              
+
                 Directory.CreateDirectory(Path.Combine(fullPathArray[0], fullPathArray[1]));
             if (!File.Exists(Path.Combine(fullPathArray)))
             {
@@ -61,10 +61,10 @@ namespace Screenshot_Saver
             {
                 string line = streamReader.ReadLine();
 
-                while (line !=null)
+                while (line != null)
                 {
                     string[] parts = line.Split('=');
-                    
+
                     AddSetting(parts[0], parts[1]);
                     line = streamReader.ReadLine();
                 }
@@ -77,22 +77,22 @@ namespace Screenshot_Saver
         /// <summary>
         /// Writes Settings to the file
         /// </summary>
-        public  void WriteFile()
+        public void WriteFile()
         {
             string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data", "Settings.txt" };
-            StreamWriter streamWriter = new StreamWriter(Path.Combine(fullPathArray),false);
+            StreamWriter streamWriter = new StreamWriter(Path.Combine(fullPathArray), false);
             try
             {
-                foreach(KeyValuePair<string,string> setting in SettingsDictionary)
+                foreach (KeyValuePair<string, string> setting in SettingsDictionary)
                 {
-                    streamWriter.WriteLine(setting.Key + "=" +setting.Value);
+                    streamWriter.WriteLine(setting.Key + "=" + setting.Value);
                 }
                 streamWriter.Close();
             }
             catch (IOException) { }
         }
 
-        
+
     }
 
 

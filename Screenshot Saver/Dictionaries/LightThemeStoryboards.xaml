@@ -1,23 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="AccentDarkColor">#FF2B2B2B</Color>
+    <Color x:Key="AccentDarkColor">#FFFCFCFC</Color>
     <Color x:Key="BordersColor">#FF9E9E9E</Color>
     <Color x:Key="BordersColorOver">#FFBFBFBF</Color>
-    <Color x:Key="AccentDarkOverColor">#FF3D3D3D</Color>
-    <Color x:Key="SettingsItemFrameColor">#FF2B2B2B</Color>
-    <Color x:Key="AccentDarkClickColor">#FF323232</Color>
+    <Color x:Key="AccentDarkOverColor">#FFF6F6F6</Color>
+    <Color x:Key="SettingsItemFrameColor">#FFFCFCFC</Color>
+    <Color x:Key="AccentDarkClickColor">#FFFDFDFD</Color>
     <Storyboard x:Key="Storyboard.Hover.Start">
         <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                    From="#FF2B2B2B"
-                    To="#3D3D3D"
+                    From="#FFFCFCFC"
+                    To="#FFF6F6F6"
                     Duration="0:0:0:0.2"/>
     </Storyboard>
 
     <Storyboard x:Key="Storyboard.Hover.Stop">
         <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                    From="#FF3D3D3D"
-                    To="#FF2B2B2B"
+                    From="#FFF6F6F6"
+                    To="#FFFCFCFC"
                     Duration="0:0:0:0.2"/>
     </Storyboard>
 

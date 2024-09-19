@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Screenshot_Saver
+namespace Screenshot_Saver.Utils
 {
     class FilesystemManipulation
     {
@@ -17,7 +17,7 @@ namespace Screenshot_Saver
         public static string CorrectPath(string path)
         {
             int size = 0;
-            for (int i = 0; i<path.Length; i++)
+            for (int i = 0; i < path.Length; i++)
             {
                 size++;
                 if (path[i] == '\\')
@@ -27,10 +27,10 @@ namespace Screenshot_Saver
             }
             char[] filePathChar = new char[size];
             int j = 0;
-            for (int i = 0; i<path.Length; i++)
+            for (int i = 0; i < path.Length; i++)
             {
                 filePathChar[j++] = path[i];
-                if (path[i]=='\\')
+                if (path[i] == '\\')
                 {
                     filePathChar[j++] = '\\';
                 }
@@ -54,9 +54,9 @@ namespace Screenshot_Saver
                 where file.Contains(".png")
                 select file;
 
-            
+
             return files.Count();
-            
+
         }
     }
 }

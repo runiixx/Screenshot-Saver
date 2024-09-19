@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -107,24 +108,34 @@ namespace Screenshot_Saver.ViewModels
 
         private bool SimilarTwoImages()
         {
-            if(LastPhoto is null)
-                return false;
-
-
-            Bitmap LastPhotoBitmap = BitmapSourceToBitmap(LastPhoto);
-            Bitmap CurrentPhotoBitmap=BitmapSourceToBitmap(CurrentPhoto);
-
-            bool ok = true;
-            for (int i = 0; i<LastPhoto.Height; i++)
+            SettingsManager Manager = new SettingsManager();
+            Manager.ReadFile();
+            if (Manager.getSettingValue("SaveCopies").Equals("True"))
             {
-                for (int j = 0; j<LastPhoto.Width; j++)
+                return false;
+            }
+            else
+            {
+                if (LastPhoto is null)
+                    return false;
+
+
+                Bitmap LastPhotoBitmap = BitmapSourceToBitmap(LastPhoto);
+                Bitmap CurrentPhotoBitmap = BitmapSourceToBitmap(CurrentPhoto);
+
+                bool ok = true;
+                for (int i = 0; i<LastPhoto.Height; i++)
                 {
-                    if (!LastPhotoBitmap.GetPixel(j,i).Equals(CurrentPhotoBitmap.GetPixel(j,i))){
-                        ok = false;
+                    for (int j = 0; j<LastPhoto.Width; j++)
+                    {
+                        if (!LastPhotoBitmap.GetPixel(j, i).Equals(CurrentPhotoBitmap.GetPixel(j, i)))
+                        {
+                            ok = false;
+                        }
                     }
                 }
+                return ok;
             }
-            return ok;
         }
 
         private System.Drawing.Bitmap BitmapSourceToBitmap(BitmapSource BitmapSource)
@@ -169,7 +180,11 @@ namespace Screenshot_Saver.ViewModels
                     AppTheme.ChangeTheme(new Uri("Dictionaries/LightThemeColors.xaml", UriKind.Relative));
                 }
             }
+
+          
         }
+        
+
 
         private void OnShortcutPressed(object? sender, GlobalKeyInterceptor.ShortcutPressedEventArgs e)
         {
