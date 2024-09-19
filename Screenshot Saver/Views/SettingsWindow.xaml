@@ -36,7 +36,7 @@
                    Grid.Row="2"/>
         <control:ToggleSwitch Style="{DynamicResource ToggleSwitchStyle1}"
                               IsChecked="{Binding DarkTheme,UpdateSourceTrigger=PropertyChanged}"
-                              Grid.Row="2"/>
+                              Grid.Row="2" Checked="ToggleSwitch_Checked"/>
         <TextBlock Style="{DynamicResource SettingsTextStyle}"
                    Grid.Row="2"
                    Text="Dark mode"/>

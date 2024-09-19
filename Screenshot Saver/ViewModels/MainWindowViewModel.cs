@@ -1,9 +1,11 @@
-﻿using Screenshot_Saver.Views;
+﻿using Screenshot_Saver.Utils;
+using Screenshot_Saver.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -138,6 +140,9 @@ namespace Screenshot_Saver.ViewModels
             return Bipmap;
 
         }
+
+        [DllImport("Kernel32")]
+        public static extern void AllocConsole();
         public MainWindowViewModel()
         {
             FileName="def";
@@ -155,6 +160,15 @@ namespace Screenshot_Saver.ViewModels
 
             KeyInterceptor = new GlobalKeyInterceptor.KeyInterceptor(Shortcuts);
             KeyInterceptor.ShortcutPressed+=OnShortcutPressed;
+
+            
+            if(App.Current is not null)
+            {
+                if (Manager.getSettingValue("DarkTheme").Equals("False"))
+                {
+                    AppTheme.ChangeTheme(new Uri("Dictionaries/LightThemeColors.xaml", UriKind.Relative));
+                }
+            }
         }
 
         private void OnShortcutPressed(object? sender, GlobalKeyInterceptor.ShortcutPressedEventArgs e)

@@ -7,9 +7,9 @@
     <!--  Round Button Style  -->
     <Style x:Key="RoundButtonStyle" TargetType="Button">
         <Style.Resources />
-        <Setter Property="Background" Value="{DynamicResource AccentDark}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentDark}" />
+        <Setter Property="Background" Value="{DynamicResource Accent}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Button.Border}" />
         <Setter Property="Margin" Value="5" />
         <Setter Property="Foreground" Value="{DynamicResource ButtonTextBrush}" />
         <Setter Property="Width" Value="150" />
@@ -22,30 +22,20 @@
                 <ControlTemplate TargetType="Button">
                     <Border
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="4">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}"/>
-                            <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Start}" />
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Stop}" />
-                            </Trigger.ExitActions>
+                            <Setter Property="Background" Value="{DynamicResource Accent.Over}" />
+
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentDarkClick}"/>
-                            <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Click.Start}"/>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Click.Stop}"/>
-                            </Trigger.ExitActions>
+                            <Setter Property="Background" Value="{DynamicResource Accent.Click}" />
+
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -60,7 +50,7 @@
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Margin" Value="1,0,0,0" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonTextBrush}" />
 
 
     </Style>
@@ -68,10 +58,10 @@
     <!--  Filename Textbox  -->
     <Style x:Key="FileName" TargetType="TextBox">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{StaticResource Borders}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Borders}" />
         <Setter Property="AcceptsReturn" Value="True" />
-        <Setter Property="Background" Value="{StaticResource TextBoxBackground}" />
-        <Setter Property="Foreground" Value="#FFF6f6f6" />
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonTextBrush}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -104,23 +94,24 @@
 
     <!--  Settings Button  -->
     <Style x:Key="SettingsButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource AccentDark}" />
-        <Setter Property="Cursor" Value="IBeam" />
+        <Setter Property="Background" Value="{DynamicResource Accent}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Button.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                    <Border 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}" />
-                            <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Start}" />
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Hover.Stop}" />
-                            </Trigger.ExitActions>
+                            <Setter Property="Background" Value="{DynamicResource Accent.Over}" />
+
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True" />
                     </ControlTemplate.Triggers>
@@ -134,7 +125,7 @@
         <Setter Property="MaxWidth" Value="60" />
         <Setter Property="MinHeight" Value="30" />
         <Setter Property="MinWidth" Value="60" />
-        <Setter Property="BorderBrush" Value="{StaticResource Borders}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Borders}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="HorizontalAlignment" Value="Right" />
@@ -144,7 +135,7 @@
                 <ControlTemplate TargetType="{x:Type control:ToggleSwitch}">
                     <Border
                         x:Name="bk"
-                        Background="{StaticResource AccentDarkClick}"
+                        Background="{DynamicResource Accent.Click}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="15">
@@ -153,33 +144,25 @@
                             Width="24"
                             Margin="2"
                             HorizontalAlignment="Left"
-                            Fill="{StaticResource Borders}" />
+                            Fill="{DynamicResource Borders}" />
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="ep" Property="HorizontalAlignment" Value="Right" />
 
-                            <Setter TargetName="bk" Property="Background" Value="{StaticResource Borders}" />
+                            <Setter TargetName="bk" Property="Background" Value="{DynamicResource Borders}" />
                             <Setter TargetName="ep" Property="Width" Value="24" />
-                            <Setter TargetName="ep" Property="Fill" Value="{StaticResource AccentDarkOver}" />
-                            <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswitch.Check.Start}"/>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswitch.Check.Stop}"/>
-
-
-                            </Trigger.ExitActions>
+                            <Setter TargetName="ep" Property="Fill" Value="{DynamicResource Accent.Over}" />
 
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentDarkOver}" />
+                            <Setter Property="Background" Value="{DynamicResource Accent.Over}" />
                             <Trigger.EnterActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswtich.Click.Start}"/>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswtich.Click.Start}" />
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
-                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswtich.Click.Stop}"/>
+                                <BeginStoryboard Storyboard="{DynamicResource Storyboard.Toggleswtich.Click.Stop}" />
                             </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -189,7 +172,7 @@
     </Style>
 
     <Style x:Key="SettingItemFrame" TargetType="Rectangle">
-        <Setter Property="Fill" Value="{StaticResource SettingsItemFrame}" />
+        <Setter Property="Fill" Value="{DynamicResource SettingsItemFrame}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="RadiusX" Value="5" />
@@ -197,15 +180,12 @@
         <Setter Property="Margin" Value="10" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="750" />
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Stroke" Value="{DynamicResource Button.Border}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Fill" Value="{StaticResource AccentDarkOver}" />
-                <Trigger.EnterActions>
-                    <BeginStoryboard Storyboard="{DynamicResource SettingsItemFrame.Hover.Start}"/>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard Storyboard="{DynamicResource SettingsItemFrame.Hover.Stop}"/>
-                </Trigger.ExitActions>
+                <Setter Property="Fill" Value="{DynamicResource Accent.Over}" />
+
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -214,7 +194,7 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="50,0,0,0" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonTextBrush}" />
         <Setter Property="FontSize" Value="16" />
     </Style>
 

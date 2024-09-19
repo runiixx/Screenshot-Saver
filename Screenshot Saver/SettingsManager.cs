@@ -35,9 +35,9 @@ namespace Screenshot_Saver
             {
                 return SettingsDictionary[Key];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return null;
+                return "default";
             }
         }
 
@@ -64,7 +64,8 @@ namespace Screenshot_Saver
                 while (line !=null)
                 {
                     string[] parts = line.Split('=');
-                    SettingsDictionary.Add(parts[0], parts[1]);
+                    
+                    AddSetting(parts[0], parts[1]);
                     line = streamReader.ReadLine();
                 }
                 streamReader.Close();

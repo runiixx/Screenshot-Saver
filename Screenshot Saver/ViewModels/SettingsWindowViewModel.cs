@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Screenshot_Saver.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -57,10 +58,22 @@ namespace Screenshot_Saver.ViewModels
                 _darkTheme= value;
 
                 OnPropertyChanged(nameof(DarkTheme));
-                
+                Manager.ReadFile();
+                Manager.AddSetting("DarkTheme", value.ToString());
+                Manager.WriteFile();
+
+                if (value)
+                {
+                    AppTheme.ChangeTheme(new Uri("Dictionaries/DarkThemeColors.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    AppTheme.ChangeTheme(new Uri("Dictionaries/LightThemeColors.xaml", UriKind.Relative));
+                }
             }
         }
 
+        
   
         public SettingsWindowViewModel()
         {
@@ -68,7 +81,8 @@ namespace Screenshot_Saver.ViewModels
             Manager=new SettingsManager();
             Manager.ReadFile();
             AutoSave = Manager.getSettingValue("AutoSave").Equals("True");
-            DarkTheme = true;
+            DarkTheme = Manager.getSettingValue("DarkTheme").Equals("True");
+            //DarkTheme = true;
         }
 
       

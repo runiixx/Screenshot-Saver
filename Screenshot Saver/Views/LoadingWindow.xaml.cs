@@ -1,5 +1,4 @@
-﻿using Screenshot_Saver.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,19 +15,24 @@ using System.Windows.Shapes;
 namespace Screenshot_Saver.Views
 {
     /// <summary>
-    /// Interaction logic for SettingsWindow.xaml
+    /// Interaction logic for LoadingWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class LoadingWindow : Window
     {
-        public SettingsWindow()
+        public LoadingWindow()
         {
             InitializeComponent();
-            DataContext= new SettingsWindowViewModel();
-        }
+            this.Hide();
+            while (true)
+            {
+                if(App.Current is not null)
+                {
+                    break;
+                }
+            }
 
-        private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
-        {
-
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }

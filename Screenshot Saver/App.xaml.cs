@@ -35,6 +35,9 @@ namespace Screenshot_Saver
             notifyIcon.Icon = new System.Drawing.Icon("Resources/icon.ico");
             notifyIcon.Visible = true;
             notifyIcon.Click += NotifyIcon_Click;
+
+            SettingsManager Manager = new SettingsManager();
+            Manager.ReadFile();
         }
 
 

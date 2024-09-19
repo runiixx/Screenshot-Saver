@@ -1,12 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--App Background-->
-    <SolidColorBrush x:Key="Background" Color="#FFCBCBDC"/>
+    
     
     <!--AccentColors-->
-    <SolidColorBrush x:Key="AccentDark" Color="#FF2B2B2B"/>
-    <SolidColorBrush x:Key="AccentDarkOver" Color="#ff3D3D3D"/>
-    <SolidColorBrush x:Key="AccentDarkClick" Color="#FF323232"/>
+    <SolidColorBrush x:Key="Accent" Color="#FF2B2B2B"/>
+    <SolidColorBrush x:Key="Accent.Over" Color="#ff3D3D3D"/>
+    <SolidColorBrush x:Key="Accent.Click" Color="#FF323232"/>
 
 
     <SolidColorBrush x:Key="ControlBackground" Color="#FF202020"/>
@@ -17,6 +16,7 @@
 
     <SolidColorBrush x:Key="Borders" Color="#FF9E9E9E"/>
 
+    <SolidColorBrush x:Key="Button.Border" Color="#FF2B2B2B"/>
     <!--For Animations-->
     <Color x:Key="AccentDarkColor">#FF2B2B2B</Color>
     <Color x:Key="BordersColor">#FF9E9E9E</Color>

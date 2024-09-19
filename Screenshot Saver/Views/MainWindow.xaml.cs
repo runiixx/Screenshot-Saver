@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Screenshot_Saver.ViewModels;
 using Screenshot_Saver.ViewModels;
+using System.Runtime.InteropServices;
 
 
 namespace Screenshot_Saver
@@ -23,12 +24,16 @@ namespace Screenshot_Saver
     /// </summary>
     public partial class MainWindow : Window
     {
+        [DllImport("Kernel32")]
+        public static extern void AllocConsole();
         public MainWindow()
         {
 
             
             InitializeComponent();
             DataContext= new MainWindowViewModel();
+
+           
         }
        
     }
