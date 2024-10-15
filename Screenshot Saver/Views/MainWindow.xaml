@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Screenshot_Saver"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="350" ResizeMode="NoResize">
+        Title="Screenshot-Saver" Height="200" Width="350" ResizeMode="NoResize">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>

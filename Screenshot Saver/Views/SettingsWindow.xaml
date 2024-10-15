@@ -59,14 +59,21 @@
             Style="{DynamicResource SettingsTextStyle}"
             Text="Save copies of the same image" />
 
-        <Rectangle Grid.Row="4" Style="{DynamicResource SettingItemFrame}"/>
+        <Rectangle Grid.Row="4" Style="{DynamicResource SettingItemFrame}" />
         <control:ToggleSwitch
             Grid.Row="4"
             IsChecked="{Binding EnableSystemTrayIcon, UpdateSourceTrigger=PropertyChanged}"
-            Style="{DynamicResource ToggleSwitchStyle1}"/>
+            Style="{DynamicResource ToggleSwitchStyle1}" />
         <TextBlock
             Grid.Row="4"
             Style="{DynamicResource SettingsTextStyle}"
-            Text="Enable system tray icon for hiding window (Restart required)"/>
+            Text="Enable system tray icon for hiding window (Restart required)" />
+
+        <Rectangle Grid.Row="5" Style="{DynamicResource SettingItemFrame}" />
+        <control:ToggleSwitch
+            Grid.Row="5"
+            IsChecked="{Binding StartupApp, UpdateSourceTrigger=PropertyChanged}"
+            Style="{DynamicResource ToggleSwitchStyle1}" />
+        
     </Grid>
 </Window>

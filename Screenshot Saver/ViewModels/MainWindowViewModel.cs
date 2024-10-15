@@ -1,6 +1,7 @@
 ﻿using Screenshot_Saver.Utils;
 using Screenshot_Saver.Views;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -23,6 +25,10 @@ namespace Screenshot_Saver.ViewModels
         private string path;
         private SettingsManager Manager;
         private string _fileName;
+        private int OpenSettingsWindowInstances;
+        private SettingsManager FileManager;
+        private SettingsWindow SettingsWindow;
+        private bool OpenedSettingsWindow;
         public string FileName
         {
             get
@@ -70,10 +76,16 @@ namespace Screenshot_Saver.ViewModels
 
         private void OpenSettingsWindow()
         {
-            SettingsWindow SettingsWindow=new SettingsWindow();
-            SettingsWindow.Show();
-
-            
+            FileManager.ReadFile();
+            OpenedSettingsWindow=FileManager.getSettingValue("OpenedSettingsWindow").Equals("True");
+            if(OpenedSettingsWindow == false)
+            {
+                OpenedSettingsWindow = true;
+                FileManager.AddSetting("OpenedSettingsWindow", OpenedSettingsWindow.ToString());
+                FileManager.WriteFile();
+                SettingsWindow settingsWindow = new SettingsWindow();
+                settingsWindow.Show();
+            }
         }
         private void SaveSettings()
         {
@@ -156,6 +168,12 @@ namespace Screenshot_Saver.ViewModels
         public static extern void AllocConsole();
         public MainWindowViewModel()
         {
+            OpenedSettingsWindow = false;
+            FileManager = new SettingsManager("WindowInstances.txt");
+            FileManager.ReadFile();
+            FileManager.AddSetting("OpenedSettingsWindow", OpenedSettingsWindow.ToString());
+            FileManager.WriteFile();
+
             FileName="def";
             OnPropertyChanged(FileName);
             Manager=new SettingsManager();

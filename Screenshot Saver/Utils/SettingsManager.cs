@@ -10,8 +10,16 @@ namespace Screenshot_Saver.Utils
 {
     public class SettingsManager
     {
+        private string FileName;
         private Dictionary<string, string> SettingsDictionary = new Dictionary<string, string>();
 
+        public SettingsManager(string FileName)
+        {
+            this.FileName=FileName;
+        }
+        public SettingsManager() {
+            this.FileName="Settings.txt";
+        }
         public void AddSetting(string Key, string Value)
         {
             if (SettingsDictionary.ContainsKey(Key))
@@ -47,7 +55,7 @@ namespace Screenshot_Saver.Utils
         public void ReadFile()
         {
 
-            string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data", "Settings.txt" };
+            string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data", FileName };
             if (!Directory.Exists(Path.Combine(fullPathArray[0], fullPathArray[1])))
 
                 Directory.CreateDirectory(Path.Combine(fullPathArray[0], fullPathArray[1]));
@@ -79,7 +87,7 @@ namespace Screenshot_Saver.Utils
         /// </summary>
         public void WriteFile()
         {
-            string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data", "Settings.txt" };
+            string[] fullPathArray = { Directory.GetCurrentDirectory(), "Data",FileName };
             StreamWriter streamWriter = new StreamWriter(Path.Combine(fullPathArray), false);
             try
             {

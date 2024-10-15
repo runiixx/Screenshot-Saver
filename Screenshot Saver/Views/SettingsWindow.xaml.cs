@@ -23,7 +23,10 @@ namespace Screenshot_Saver.Views
         public SettingsWindow()
         {
             InitializeComponent();
-            DataContext= new SettingsWindowViewModel();
+            
+            SettingsWindowViewModel viewModel = new SettingsWindowViewModel();
+            DataContext= viewModel;
+            Closing += viewModel.OnWindowClosing;
         }
 
         private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)

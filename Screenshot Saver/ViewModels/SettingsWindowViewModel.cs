@@ -1,7 +1,9 @@
-﻿using Screenshot_Saver.Utils;
+﻿using Screenshot_Saver.Models;
+using Screenshot_Saver.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration.Internal;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,30 +15,29 @@ namespace Screenshot_Saver.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         public SettingsManager Manager;
 
-        private int _windowWidth;
+        private SettingsModel SettingsModel;
+
         public int WindowWidth
         {
             get
             {
-                return _windowWidth;
+                return SettingsModel.WindowWidth;
             }
             set
             {
-                _windowWidth= value;
+                SettingsModel.WindowWidth= value;
                 OnPropertyChanged(nameof(WindowWidth));
             }
         }
-
-        private bool _autoSave = false;
         public bool AutoSave
         {
             get
             {
-                return _autoSave;
+                return SettingsModel.AutoSave;
             }
             set
             {
-                _autoSave= value;
+                SettingsModel.AutoSave= value;
                 OnPropertyChanged(nameof(AutoSave));
                 SettingsManager Manager = new SettingsManager();
                 Manager.ReadFile();
@@ -46,16 +47,16 @@ namespace Screenshot_Saver.ViewModels
             }
         }
 
-        private bool _darkTheme;
+        
         public bool DarkTheme
         {
             get
             {
-                return _darkTheme;
+                return SettingsModel.DarkTheme;
             }
             set
             {
-                _darkTheme= value;
+                SettingsModel.DarkTheme= value;
 
                 OnPropertyChanged(nameof(DarkTheme));
                 Manager.ReadFile();
@@ -75,35 +76,30 @@ namespace Screenshot_Saver.ViewModels
             }
         }
 
-        private bool _saveCopies;
-
         public bool SaveCopies
         {
             get
             {
-                return _saveCopies;
+                return SettingsModel.SaveCopies;
             }
             set
             {
-                _saveCopies= value;
+                SettingsModel.SaveCopies= value;
                 OnPropertyChanged(nameof(SaveCopies));
                 Manager.ReadFile();
                 Manager.AddSetting("SaveCopies", value.ToString());
                 Manager.WriteFile();
             }
         }
-
-        private bool _enableSystemTrayIcon;
-
         public bool EnableSystemTrayIcon
         {
             get
             {
-                return _enableSystemTrayIcon;
+                return SettingsModel.EnableSystemTrayIcon;
             }
             set
             {
-                _enableSystemTrayIcon = value;
+                SettingsModel.EnableSystemTrayIcon= value;
                 OnPropertyChanged(nameof(EnableSystemTrayIcon));
                 Manager.ReadFile();
                 Manager.AddSetting("EnableSystemTrayIcon", value.ToString());
@@ -113,6 +109,7 @@ namespace Screenshot_Saver.ViewModels
   
         public SettingsWindowViewModel()
         {
+            SettingsModel = new SettingsModel();
             WindowWidth=300;
             Manager=new SettingsManager();
             Manager.ReadFile();
@@ -127,6 +124,16 @@ namespace Screenshot_Saver.ViewModels
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void OnWindowClosing(object sender,CancelEventArgs e)
+        {
+
+
+            SettingsManager fileManager = new SettingsManager("WindowInstances.txt");
+            fileManager.ReadFile();
+            fileManager.AddSetting("OpenedSettingsWindow", false.ToString());
+            fileManager.WriteFile();
         }
     }
 }
